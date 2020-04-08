@@ -1,0 +1,28 @@
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
+from firebase_admin import storage
+
+
+
+keyFile = 'aibigdata.json'
+
+storageBucket = 'aibigdata-107598064-271403.appspot.com'
+
+
+cred = credentials.Certificate(keyFile)
+
+firebase_admin.initialize_app(cred, {'storageBucket': storageBucket})
+
+client = firestore.client()
+
+bucket = storage.bucket()
+
+blob = bucket.blob('test/aibigdata.json')
+blob.upload_from_filename(keyFile)
+blob.make_public()
+
+
+
+
+
